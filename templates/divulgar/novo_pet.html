@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}<title>Novo Pet</title>{% endblock title %}
+{% block css %}
+    <link href="{% static 'css/novo_pet.css' %}" rel="stylesheet">
+{% endblock css %}
+{% block content %}
+    <div class="col-md">
+        <div class="wrapper">
+            <div class="box">
+                <div class="header-box">
+                    <h3 class="font-vinho">Quero divulgar</h3>
+                    <hr>
+                </div>
+                <div class="body-box">
+                    {% if 'atualizar_pet' in request.path %}
+                        ATUALIZAR
+                        <form action="{% url 'atualizar_pet' %}" method="POST" enctype='multipart/form-data'
+                              class="form-horizontal" novalidate>
+                    {% else %}
+                        NOVO
+                        <form action="{% url 'novo_pet' %}" method="POST" enctype='multipart/form-data'
+                              class="form-horizontal" novalidate>
+                    {% endif %}
+                    {% csrf_token %}
+                    {{ form }}
+                    <input type="submit" value="ENVIAR" class="btn-custom-primary">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

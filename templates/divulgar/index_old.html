@@ -1,0 +1,59 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cadastro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'css/cadastro.css' %}" rel="stylesheet">
+    <link href="{% static 'css/novo_pet.css' %}" rel="stylesheet">
+
+    <link href="{% static 'divulgar/css/seus_pet.css' %}" rel="stylesheet">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="jumbotron">
+        <h1>Listagem de Pets para adoção</h1>
+        <div class="text-right">
+            <a class="btn btn-primary" href="{% url 'novo_pet' %}">Novo Cão</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-condensed table-bordered">
+                <thead>
+                <th>#</th>
+                <th>Nome</th>
+                <th>Raça</th>
+                <th>Responsável</th>
+                <th>Foto</th>
+                <th>Descrição</th>
+                <th>Telefone</th>
+                <th>Cidade</th>
+                <th>Estado</th>
+                </thead>
+                <tbody>
+                {% for pet in pets %}
+                    <tr>
+                        <td>{{ pet.id }}</td>
+                        <td>{{ pet }}</td>
+                        <td>{{ pet.raca }}</td>
+                        <td>{{ pet.usuario }}</td>
+                        <td><img width="80" height="80" src="{{ pet.foto.url }}"></td>
+                        <td>{{ pet.descricao | lower }}</td>
+                        <td>{{ pet.telefone }}</td>
+                        <td>{{ pet.cidade }}</td>
+                        <td>{{ pet.estado }}</td>
+                        <td>
+                            <a href="{% url 'atualizar_pet' pet.id %}">Editar</a>
+                            <a href="">Excluir</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
